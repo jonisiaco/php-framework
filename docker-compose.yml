@@ -1,0 +1,68 @@
+version: '3'
+
+services:
+    web:
+        image: nginx:1.16.1
+        container_name: nginx1.6
+        restart: on-failure
+        ports:
+            - "5000:80"
+        volumes:
+            - ./www:/var/www
+            - ./nginx1.6/site.conf:/etc/nginx/conf.d/site.conf
+        working_dir: /var/www
+        networks:
+          backend:
+            ipv4_address: 172.16.238.10
+
+    php:
+        build:
+            context: ./php7.3
+            dockerfile: Dockerfile
+        container_name: php7.3
+        volumes:
+            - ./www:/var/www
+        networks:
+          backend:
+            ipv4_address: 172.16.238.11
+
+    db:
+        image: mysql:5.7
+        container_name: mysql5.7
+        ports:
+            - "3306:3306"
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=root
+        volumes:
+            - ./mysql-data:/var/lib/mysql
+        networks:
+          backend:
+            ipv4_address: 172.16.238.12
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        ports:
+            - "8888:80"
+        environment:
+            - PMA_HOST=172.16.238.1
+        networks:
+          backend:
+            ipv4_address: 172.16.238.13
+
+    memcached:
+        image: memcached:latest
+        container_name: memcached
+        ports:
+            - "11211:11211"
+        networks:
+          backend:
+            ipv4_address: 172.16.238.14
+
+networks:
+    backend:
+        ipam:
+            driver: default
+            config:
+                - subnet: "172.16.238.0/24"
