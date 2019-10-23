@@ -16,5 +16,6 @@ return [
 	'response' => new Response(),
 	'emitter' => new SapiEmitter(),
 
-	'twig_loader' => new FilesystemLoader( __DIR__. '/../html' ),
+	'twig_loader' => new FilesystemLoader( __DIR__. '/html' ),
+	'twig_cache' =>  __DIR__. '/cache' ,
 ];

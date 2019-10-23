@@ -5,6 +5,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use League\Route\Router;
 use Zend\Diactoros\Response;
+use DI\Container;
+use League\Route\Strategy\ApplicationStrategy;
 
 require_once __DIR__. '/../vendor/autoload.php';
 
@@ -14,17 +16,11 @@ $container = $container_builder->build();
 
 $request = $container->get('request');
 
-$router = new Router;
+$strategy = (new ApplicationStrategy)->setContainer($container);
+$router   = (new Router)->setStrategy($strategy);
 
-$router->map('GET', '/', function (ServerRequestInterface $request) : ResponseInterface {
-    $response = new Response;
-    $response->getBody()->write('<h1>Good!</h1>');
-    return $response;
-});
-
-$router->map('GET', '/signin', 'App\Controller\AuthController::index');
+$router = App\Routes::map($router);
 
 $response = $router->dispatch( $request );
-
 $container->get('emitter')->emit($response);
 
