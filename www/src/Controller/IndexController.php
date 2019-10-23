@@ -11,7 +11,6 @@ use Zend\Diactoros\Response;
 class IndexController
 {
     /**
-     * Controller.
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request
      *
