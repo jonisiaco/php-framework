@@ -25,6 +25,9 @@ class Routes
 		$router->map('GET', '/signin',		'App\Controller\AuthController::signin');
 		$router->map('POST', '/signin',		'App\Controller\AuthController::signin');
 
+		#UserController
+		$router->map('GET', '/users',		'App\Controller\UserController::index');
+
 		return $router;
 	}
 	

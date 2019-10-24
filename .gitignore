@@ -16,3 +16,6 @@
 #Git files
 composer.lock
 composer.phar
+
+#
+.idea
