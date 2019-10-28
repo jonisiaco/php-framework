@@ -1,12 +1,9 @@
 <?php
 
-# php vendor/bin/doctrine orm:schema-tool:update --dump-sql //Validate Entity
-# php vendor/bin/doctrine orm:schema-tool:update --force //Schema Sync
-# php vendor/bin/doctrine orm:generate-entities ./src/Entity/ --generate-annotations=true //Generating Entity Getters and Setters
-
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -21,8 +18,9 @@ class User
      */
     protected $id;
 
-    /** 
-     * @ORM\Column(name="name", type="string", length=100, nullable=false) 
+    /**
+     * @ORM\Column(name="name", type="string", length=100, nullable=false)
+     * @ORM\OneToMany(targetEntity="News", mappedBy="author")
      */
     protected $name;
 
@@ -41,12 +39,14 @@ class User
      */
     protected $created_at;
 
-    /*
-    public function __construct()
-    {
-        $this->created_at = new DateTime(); 
+    public function __construct() {
+        $this->name = new ArrayCollection();
     }
-    */
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     public function getId()
     {

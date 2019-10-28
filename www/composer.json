@@ -14,7 +14,8 @@
 		"twig/twig": "^2.12",
 		"doctrine/orm": "^2.6",
 		"symfony/yaml": "^4.3",
-		"zendframework/zend-session": "^2.9"
+		"zendframework/zend-session": "^2.9",
+		"zendframework/zend-paginator": "^2.8"
     }
 
 }

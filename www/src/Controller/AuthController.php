@@ -25,10 +25,7 @@ class AuthController
     {
         $bootstrap = new Bootstrap($this->container);
         $entity_manager = $bootstrap->entityManager();
-        /*
-        $query = $entity_manager->getRepository('App\Entity\User');
-        $users = $query->findAll();
-        */
+
         $post = $request->getParsedBody();
         if($post){
             $salt = $this->container->get('aes')['token'];
@@ -45,7 +42,7 @@ class AuthController
             if ((string)$result['pass'] === (string)$post['password']) {
                 $container = new Session\Container('session_data');
                 $container->user = $result;
-                return new Response\RedirectResponse('/users');
+                return new Response\RedirectResponse('/admin/users');
             }
         }
 

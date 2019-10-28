@@ -1,0 +1,35 @@
+  <!doctype html>
+  <html lang="en">
+   <head>
+     <meta charset="UTF-8">
+     <title>News Admin</title>
+     <link rel="stylesheet" href="">
+   </head>
+   <body>
+
+    <h1>News</h1>
+
+    <ul>
+        <li>Title</li>
+        <li>{{news.getTitle}}</li>
+    </ul>
+    <ul>
+        <li>Author</li>
+        <li>{{news.getAuthor.getName}}</li>
+    </ul>
+    <ul>
+        <li>Text</li>
+        <li>{{news.getContent|nl2br}}</li>
+    </ul>
+    <ul>
+        <li>Last modified</li>
+        <li>{{news.getUpdatedAt.format('Y-m-d H:i:s')}}</li>
+    </ul>
+    <ul>
+        <li>Created at</li>
+        <li>{{news.getCreatedAt.format('Y-m-d H:i:s')}}</li>
+    </ul>
+
+
+   </body>
+  </html>

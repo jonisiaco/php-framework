@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News Admin</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+
+    <h1>News info</h1>
+
+    <fieldset>
+        <legend>Create a new</legend>
+        <form action="" autocomplete="off" method="POST">
+            <p>
+                <label>Title</label><br/>
+                <input type="text" name="title" value="{{news.getTitle}}">
+            </p>
+            <p>
+                <label>Author</label><br/>
+                <select name="author">
+                    {% for author in authors %}
+                        {% if author.id == news.getAuthor.getId %}
+                            <option selected value="{{author.id}}">{{author.name}}</option>
+                        {% else %}
+                            <option value="{{author.id}}">{{author.name}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </p>
+            <p>
+                <label>Body</label><br/>
+                <textarea name="content">{{news.getContent}}</textarea>
+            </p>
+            <p>
+                <input type="hidden" name="id" value="{{news.getId}}">
+                <input type="submit" name="send" value="Send">
+            </p>
+        </form>
+    </fieldset>
+    <div>
+        {% if error %}
+            {{error}}
+        {% endif %}
+    </div>
+</body>
+</html>

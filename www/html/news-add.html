@@ -1,0 +1,44 @@
+  <!doctype html>
+  <html lang="en">
+   <head>
+     <meta charset="UTF-8">
+     <title>News Admin</title>
+     <link rel="stylesheet" href="">
+   </head>
+   <body>
+
+    <h1>News</h1>
+
+    <fieldset>
+        <legend>Create a new</legend>
+        <form action="" autocomplete="off" method="POST">
+            <p>
+                <label>Title</label><br/>
+                <input type="text" name="title">
+            </p>
+            <p>
+                <label>Author</label><br/>
+                <select name="author">
+                    {% for author in authors %}
+                        <option value="{{author.id}}">{{author.name}}</option>
+                    {% endfor %}
+                </select>
+            </p>
+            <p>
+                <label>Body</label><br/>
+                <textarea name="content"></textarea>
+            </p>
+            <p>
+                <input type="hidden" name="csrf">
+                <input type="submit" name="send" value="Send">
+            </p>
+        </form>
+    </fieldset>
+   <div>
+    {% if error %}
+        {{error}}
+    {% endif %}
+   </div>
+
+   </body>
+  </html>

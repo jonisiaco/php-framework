@@ -1,0 +1,19 @@
+  <!doctype html>
+  <html lang="en">
+   <head>
+     <meta charset="UTF-8">
+     <title>Users</title>
+     <link rel="stylesheet" href="">
+   </head>
+   <body>
+
+   <h1>Hello {{users.0.name}}!</h1>
+
+   <ul>
+       {% for user in users %}
+       <li>{{ user.email }}</li>
+       {% endfor %}
+   </ul>
+
+   </body>
+  </html>

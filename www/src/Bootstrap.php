@@ -12,7 +12,7 @@ use Doctrine\ORM\Tools\Setup;
 class Bootstrap
 {
 	#Doctrine Metadata Configuration
-	private $dev_mode = false;
+	private $dev_mode = true;
 	private $proxy = null;
 	private $cache = null;
 	private $simple_mode = false;

@@ -1,0 +1,47 @@
+  <!doctype html>
+  <html lang="en">
+   <head>
+     <meta charset="UTF-8">
+     <title>News Admin</title>
+     <link rel="stylesheet" href="">
+   </head>
+   <body>
+
+    <h1>News</h1>
+
+    <ul>
+        {% for n in news %}
+            <li><a href="/admin/news/{{n.getId}}" >{{ n.getTitle }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <nav>
+        <ul class="">
+            {% if pages.previous %}
+                <li><a href="/admin/news/page/{{pages.previous}}">&laquo;</a></li>
+            {% else %}
+                <li><a class="disabled" href="#">&laquo;</a></li>
+            {% endif %}
+
+            {% for num in pages.pagesInRange %}
+                {% if num == pages.current %}
+                    <li class="active">
+                        <a href="/admin/news/page/{{num}}"><strong>{{num}}</strong></a>
+                    </li>
+                {% else %}
+                    <li class="">
+                        <a href="/admin/news/page/{{num}}">{{num}}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if pages.next %}
+                <li><a href="/admin/news/page/{{pages.next}}">&raquo;</a></li>
+            {% else %}
+                <li><a class="disabled" href="#">&raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+   </body>
+  </html>
