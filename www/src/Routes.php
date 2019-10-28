@@ -38,7 +38,6 @@ class Routes
         $router->map('GET', '/admin/news/edit/{id:number}', 'App\Controller\NewsController::update');
         $router->map('POST', '/admin/news/edit/{id:number}', 'App\Controller\NewsController::update');
         $router->map('GET', '/admin/news/delete/{id:number}', 'App\Controller\NewsController::delete');
-        $router->map('POST', '/admin/news/delete', 'App\Controller\NewsController::delete');
 
 		return $router;
 	}

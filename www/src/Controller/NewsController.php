@@ -204,12 +204,22 @@ class NewsController
             return new RedirectResponse('/signin');
         }
 
-        $twig = new Environment( $this->container->get('twig_loader') );
-        $body = $twig->render('news-delete.html');
+        $bootstrap = new Bootstrap($this->container);
+        $entity_manager = $bootstrap->entityManager();
+
+        $page = $args['id'] ?? 0;
+        $news = $entity_manager->getRepository('App\Entity\News')
+                                ->findOneBy(['id' => $page]);
 
         $response = new Response;
-        $response->getBody()->write($body);
-        return $response->withStatus(200);
+        if (!$news){
+            return $response->withStatus(404);
+        }
+
+        $entity_manager->remove($news);
+        $entity_manager->flush();
+
+        return new RedirectResponse('/admin/news');
 
     }
 
